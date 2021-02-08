@@ -8,9 +8,13 @@
 
 {% block body %}
     <div class="d-flex min-vh-100 align-items-center justify-content-center text-light">
-        <form method="post" class="container app-container-xxs">
+        <form method="post" class="container app-container-xxs" novalidate="novalidate">
+            <h1 class="h3 mb-3 fw-lighter">ATC Salesforce Connector</h1>
+
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger" role="alert">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
             {% endif %}
 
             {% if app.user %}
@@ -19,7 +23,7 @@
                 </div>
             {% endif %}
 
-            <h1 class="h3 mb-3 fw-lighter">ATC Salesforce Connector</h1>
+
             <div class="form-floating mb-3 text-dark">
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="login" required autofocus>
                 <label for="inputUsername">Identifiant</label>
