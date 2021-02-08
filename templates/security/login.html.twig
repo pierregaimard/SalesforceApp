@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex min-vh-100 align-items-center justify-content-center text-light">
+        <form method="post" class="container app-container-xxs" novalidate="novalidate">
+            <h1 class="h3 mb-3 fw-lighter">ATC Salesforce Connector</h1>
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+
+            <div class="form-floating mb-3 text-dark">
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="login" required autofocus>
+                <label for="inputUsername">Identifiant</label>
+            </div>
+            <div class="form-floating mb-3 text-dark">
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="password" required>
+                <label for="inputPassword">Mot de passe</label>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            #}
+
+            <button class="btn btn-outline-light px-4" type="submit">
+                Connexion
+            </button>
+        </form>
+    </div>
+{% endblock %}
