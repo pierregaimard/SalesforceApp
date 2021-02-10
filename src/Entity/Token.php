@@ -2,7 +2,12 @@
 
 namespace App\Entity;
 
-class Token
+use App\Salesforce\TokenInterface;
+use \DateTime;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
+
+class Token implements TokenInterface
 {
     /**
      * @var string
@@ -28,6 +33,12 @@ class Token
      * @var string
      */
     private string $issuedAt;
+
+    /**
+     * @var DateTime
+     * @Ignore()
+     */
+    private DateTime $createdAt;
 
     /**
      * @return string
@@ -107,5 +118,44 @@ class Token
     public function setIssuedAt(string $issuedAt): void
     {
         $this->issuedAt = $issuedAt;
+        $this->setCreatedAt();
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(): void
+    {
+        $timestamp = substr($this->issuedAt, 0, -3);
+        $date = new DateTime();
+        $date->setTimestamp($timestamp);
+
+        $this->createdAt = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * @param int $maxLifetime
+     *
+     * @return bool
+     */
+    public function hasExpired(int $maxLifetime): bool
+    {
+        $expiredTime = new DateTime();
+        $expiredTime->modify('-'. $maxLifetime .' second');
+
+        return $expiredTime > $this->getCreatedAt();
     }
 }
