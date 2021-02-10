@@ -8,6 +8,8 @@ parameters:
     app.sf_client_secret:   '%env(SF_CLIENT_SECRET)%'
     app.sf_username:        '%env(SF_USERNAME)%'
     app.sf_password:        '%env(SF_PASSWORD)%'
+    app.sf_api_version:     'v50.0'
+    app.sf_token_max_lifetime: 3600
 
 services:
     # default configuration for services in *this* file
@@ -33,3 +35,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Salesforce\ApiTokenProvider:
+        arguments:
+            $sfClientId: '%env(SF_CLIENT_ID)%'
+            $sfClientSecret: '%env(SF_CLIENT_SECRET)%'
+            $sfUsername: '%env(SF_USERNAME)%'
+            $sfPassword: '%env(SF_PASSWORD)%'
+
+    App\Salesforce\TokenManager:
+        arguments:
+            $maxLifetime: '%app.sf_token_max_lifetime%'
