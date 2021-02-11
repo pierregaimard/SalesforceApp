@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Salesforce\TokenInterface;
 use \DateTime;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 class Token implements TokenInterface
@@ -27,7 +26,7 @@ class Token implements TokenInterface
     /**
      * @var string
      */
-    private string $tokenBearer;
+    private string $tokenType;
 
     /**
      * @var string
@@ -91,17 +90,17 @@ class Token implements TokenInterface
     /**
      * @return string
      */
-    public function getTokenBearer(): string
+    public function getTokenType(): string
     {
-        return $this->tokenBearer;
+        return $this->tokenType;
     }
 
     /**
-     * @param string $tokenBearer
+     * @param string $tokenType
      */
-    public function setTokenBearer(string $tokenBearer): void
+    public function setTokenType(string $tokenType): void
     {
-        $this->tokenBearer = $tokenBearer;
+        $this->tokenType = $tokenType;
     }
 
     /**
@@ -150,6 +149,8 @@ class Token implements TokenInterface
      * @param int $maxLifetime
      *
      * @return bool
+     *
+     * @Ignore()
      */
     public function hasExpired(int $maxLifetime): bool
     {
