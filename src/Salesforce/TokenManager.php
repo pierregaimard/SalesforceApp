@@ -50,7 +50,7 @@ class TokenManager implements TokenManagerInterface
         # If session token do not exists
         if (!$this->tokenSessionManager->hasSessionToken()) {
             $this->setToken();
-            return $this->getToken();
+            return $this->token->getToken();
         }
 
         # Get token form session
@@ -61,7 +61,7 @@ class TokenManager implements TokenManagerInterface
             $this->setToken();
         }
 
-        return $this->getToken();
+        return $this->token->getToken();
     }
 
     private function setToken(): void
