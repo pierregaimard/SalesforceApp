@@ -8,21 +8,10 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class ApiRequestManager implements ApiRequestManagerInterface
 {
-    /**
-     * @var HttpClientInterface
-     */
-    private HttpClientInterface $httpClient;
-
-    /**
-     * @var TokenManagerInterface
-     */
-    private TokenManagerInterface $tokenManager;
-
-    public function __construct(HttpClientInterface $httpClient, TokenManagerInterface $tokenManager)
-    {
-        $this->httpClient = $httpClient;
-        $this->tokenManager = $tokenManager;
-    }
+    public function __construct(
+        private HttpClientInterface $httpClient,
+        private TokenManagerInterface $tokenManager)
+    {}
 
     /**
      * @param ApiRequestInterface $request
