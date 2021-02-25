@@ -7,25 +7,14 @@ class ApiGetRequest implements ApiRequestInterface
     /**
      * @var string
      */
-    private string $method = 'GET';
-
-    /**
-     * @var string
-     */
-    private string $url;
-
-    /**
-     * @var array
-     */
-    private array $options;
+    private const METHOD = 'GET';
 
     /**
      * @param string $url
      * @param array  $options
      */
-    public function __construct(string $url, array $options = [])
+    public function __construct(private string $url, private array $options = [])
     {
-        $this->url = $url;
         $this->options = array_merge_recursive($options, $this->setOptionsHeaders());
         $this->options = array_unique($this->options);
     }
@@ -47,7 +36,7 @@ class ApiGetRequest implements ApiRequestInterface
      */
     public function getMethod(): string
     {
-        return $this->method;
+        return self::METHOD;
     }
 
     /**
