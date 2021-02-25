@@ -8,7 +8,7 @@ parameters:
     app.sf_client_secret:   '%env(SF_CLIENT_SECRET)%'
     app.sf_username:        '%env(SF_USERNAME)%'
     app.sf_password:        '%env(SF_PASSWORD)%'
-    app.sf_api_version:     'v50.0'
+    app.sf_api_url:     'https://eu27.salesforce.com/services/data/v50.0'
     app.sf_token_max_lifetime: 3600
 
 services:
