@@ -2,7 +2,7 @@
 
 namespace App\Salesforce;
 
-abstract class ApiAbstractEntity implements ApiEntityInterface
+abstract class AbstractApiEntity implements ApiEntityInterface
 {
     public const TYPE = 'type';
     public const URL  = 'url';
