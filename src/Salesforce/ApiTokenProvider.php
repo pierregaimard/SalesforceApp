@@ -23,51 +23,14 @@ class ApiTokenProvider implements TokenProviderInterface
     private const KEY_USERNAME = 'username';
     private const KEY_PASSWORD = 'password';
 
-    /**
-     * @var HttpClientInterface
-     */
-    private HttpClientInterface $httpClient;
-
-    /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
-    /**
-     * @var string
-     */
-    private string $sfClientId;
-
-    /**
-     * @var string
-     */
-    private string $sfClientSecret;
-
-    /**
-     * @var string
-     */
-    private string $sfUsername;
-
-    /**
-     * @var string
-     */
-    private string $sfPassword;
-
     public function __construct(
-        HttpClientInterface $httpClient,
-        SerializerInterface $serializer,
-        string $sfClientId,
-        string $sfClientSecret,
-        string $sfUsername,
-        string $sfPassword
-    ) {
-        $this->httpClient = $httpClient;
-        $this->sfClientId = $sfClientId;
-        $this->sfClientSecret = $sfClientSecret;
-        $this->sfUsername = $sfUsername;
-        $this->sfPassword = $sfPassword;
-        $this->serializer = $serializer;
-    }
+        private HttpClientInterface $httpClient,
+        private SerializerInterface $serializer,
+        private string $sfClientId,
+        private string $sfClientSecret,
+        private string $sfUsername,
+        private string $sfPassword
+    ) {}
 
     /**
      * @return TokenInterface
