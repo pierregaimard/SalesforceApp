@@ -4,35 +4,13 @@ namespace App\Salesforce;
 
 class TokenManager implements TokenManagerInterface
 {
-    /**
-     * @var TokenProviderInterface
-     */
-    private TokenProviderInterface $provider;
-
-    /**
-     * @var TokenSessionManager
-     */
-    private TokenSessionManager $tokenSessionManager;
-
-    /**
-     * @var int
-     */
-    private int $maxLifetime;
-
-    /**
-     * @var TokenInterface|null
-     */
     private ?TokenInterface $token = null;
 
     public function __construct(
-        TokenProviderInterface $provider,
-        TokenSessionManager $tokenSessionManager,
-        int $maxLifetime
-    ) {
-        $this->provider = $provider;
-        $this->tokenSessionManager = $tokenSessionManager;
-        $this->maxLifetime = $maxLifetime;
-    }
+        private TokenProviderInterface $provider,
+        private TokenSessionManager $tokenSessionManager,
+        private int $maxLifetime
+    ) {}
 
     public function getToken(): string
     {
