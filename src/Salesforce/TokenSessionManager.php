@@ -8,25 +8,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class TokenSessionManager
 {
-
     private const KEY_SF_TOKEN = 'SF_TOKEN';
 
-    /**
-     * @var SessionInterface
-     *
-     */
-    private SessionInterface $session;
-
-    /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
-    public function __construct(SessionInterface $session, SerializerInterface $serializer)
-    {
-        $this->session = $session;
-        $this->serializer = $serializer;
-    }
+    public function __construct(
+        private SessionInterface $session,
+        private SerializerInterface $serializer)
+    {}
 
     /**
      * @param TokenInterface $token
